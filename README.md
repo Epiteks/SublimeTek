@@ -4,17 +4,31 @@ SublimeText plugin for Epitech students
 
 ##Install
 
-Add [this repo](https://github.com/hug33k/Sublime-Tek) in Package Control then install it.
+Add [this repo](https://github.com/hug33k/Sublime-Tek) in Package Control :
+__ctrl+shift+p__ > _Package Control: Add repository_
+
+Then install it :
+__ctrl+shift+p__ > _Package Control: Install package_ > "Sublime Tek"
 
 ##Usage
 
-
+Press __ctrl+alt+space__ (Windows / Linux) or __cmd+alt+space__ (OSX) to use Sublime Tek.
+(Temporarily, it launch only the "Norme" checker)
 
 ##Features
 
-
+* Norme Checker
+    * Header
+    * Includes
+    * Columns number
+    * Lines number
+    * Functions number
+    * Spaces around keywords
+    * Superfluous \n
 
 ##TODO
+
+* Command Palette
 
 * Settings
     * Settings file
