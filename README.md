@@ -12,6 +12,12 @@ __ctrl+shift+p__ > _Package Control: Install package_ > "Sublime Tek"
 
 ##Usage
 
+###Method 1 : Command Palette
+
+__ctrl+shift+p__ > "Sublime Tek" > Your choice
+
+##Method 2 : Keybinding
+
 Press __ctrl+alt+space__ (Windows / Linux) or __cmd+alt+space__ (OSX) to use Sublime Tek.
 (Temporarily, it launch only the "Norme" checker)
 
@@ -27,8 +33,6 @@ Press __ctrl+alt+space__ (Windows / Linux) or __cmd+alt+space__ (OSX) to use Sub
     * Superfluous \n
 
 ##TODO
-
-* Command Palette
 
 * Settings
     * Settings file
