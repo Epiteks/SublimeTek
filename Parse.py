@@ -70,7 +70,7 @@ class	Highlight():
 	def	get_current_infos(self):
 		codes, icons, texts = ErrorCode.get_tabs()
 		if self.last_pushed_index < len(self.errors):
-			icon = "Packages/Test/" + icons[self.last_pushed_index] + ".png"
+			icon = "Packages/Sublime-Tek/misc/" + icons[self.last_pushed_index] + ".png"
 			return codes[self.last_pushed_index], icon
 		else:
 			return None, None
