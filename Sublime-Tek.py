@@ -9,7 +9,7 @@ else:
 	from . import Parse
 	from . import Norme
 
-class	EpitechNormeCommand(sublime_plugin.TextCommand):
+class	SublimeTekNormeCommand(sublime_plugin.TextCommand):
 
 	def	get_syntax(self):
 		rawSyntax = self.view.settings().get("syntax")
