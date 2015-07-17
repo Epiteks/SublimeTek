@@ -43,7 +43,7 @@ class	SublimeTekNormeCommand(sublime_plugin.TextCommand):
 						start = end - len(item.text)
 					if item.code == Parse.ErrorCode.value("NBNEWLINE"):
 						end += 1
-				elif item.code == Parse.ErrorCode.value("NOHEAD") or item.code == Parse.ErrorCode.value("BADHEAD"):
+				elif item.code == Parse.ErrorCode.value("NOHEAD"):
 					start = 0
 					end = start
 					for line in file.header.lines:
@@ -76,6 +76,9 @@ class	SublimeTekNormeCommand(sublime_plugin.TextCommand):
 			errors.add(error)
 		for error in file.header.errors:
 			errors.add(error)
+		for line in file.header.lines:
+			for error in line.errors:
+				errors.add(error)
 		for error in file.includes.errors:
 			errors.add(error)
 		for line in file.includes.lines:

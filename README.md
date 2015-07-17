@@ -38,7 +38,6 @@ Press __ctrl+alt+space__ (Windows / Linux) or __cmd+alt+space__ (OSX) to use Sub
     * Settings file
 
 * Header
-    * Line by line
     * Filename
     * Login
 

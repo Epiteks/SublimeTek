@@ -10,23 +10,24 @@ class	Norme():
 
 	@staticmethod
 	def	header(header):
+		lines = []
 		filename = login = name = "[\s\S]*?"
 		line = re.escape("**") + " "
-		regex = re.escape("/*") + "\n"
-		regex += line + filename + " for [\s\S]*? in [\s\S]*?\n"
-		regex += line + "\n"
-		regex += line + "Made by " + name + "\n"
-		regex += line + "Login   <" + login + "@epitech.net>\n"
-		regex += line + "\n"
-		regex += line + "Started on\t[\s\S]*?" + name + "\n"
-		regex += line + "Last update\t[\s\S]*?" + name + "\n"
-		regex += re.escape("*/") + "\n"
-		headerInline = ""
-		for line in header.lines:
-			headerInline += line.text + "\n"
-		pattern = re.compile(regex)
-		if not pattern.match(headerInline):
-			header.errors.append(Parse.Error("BADHEAD", "", "HEAD"))
+		lines.append(re.escape("/*"))
+		lines.append(line + filename + " for [\s\S]*? in [\s\S]*?")
+		lines.append(line)
+		lines.append(line + "Made by " + name)
+		lines.append(line + "Login   <" + login + "@epitech.net>")
+		lines.append(line)
+		lines.append(line + "Started on\t[\s\S]*?" + name)
+		lines.append(line + "Last update\t[\s\S]*?" + name)
+		lines.append(re.escape("*/"))
+		for user, head in zip(header.lines, lines):
+			pattern = re.compile(head)
+			if not pattern.match(user.text):
+				print("ERROR")
+				print(user)
+				user.errors.append(Parse.Error("BADHEAD", user.text, "HEAD", user))
 
 	@staticmethod
 	def	includes(includes):
