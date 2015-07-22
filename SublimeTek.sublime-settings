@@ -1,0 +1,13 @@
+{
+	"login": "",
+	"full_name": "",
+	"unix_password": "",
+	"BLIH":
+	{
+		"server": "git.epitech.eu",
+		"auto_clone": false,
+		"rendu_folder": "",
+		"base_location" : null,
+		"ask_for_folder_at_clone": false,
+	}
+}

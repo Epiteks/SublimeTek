@@ -1,6 +1,26 @@
 [
 	{
-		"caption": "Sublime Tek: Check Norme",
+		"caption": "SublimeTek: Check Norme",
 		"command": "sublime_tek_norme"
+	},
+	{
+		"caption": "SublimeTek: BLIH Create Repository",
+		"command": "sublime_tek_blih_create_repo"
+	},
+	{
+		"caption": "SublimeTek: BLIH Delete Repository",
+		"command": "sublime_tek_blih_delete_repo"
+	},
+	{
+		"caption": "SublimeTek: BLIH Clone Repository",
+		"command": "sublime_tek_blih_clone_repo"
+	},
+	{
+		"caption": "SublimeTek: BLIH Get Repository ACLs",
+		"command": "sublime_tek_blih_get_acls_repo"
+	},
+	{
+		"caption": "SublimeTek: BLIH Set Repository ACLs",
+		"command": "sublime_tek_blih_set_acls_repo"
 	}
 ]
