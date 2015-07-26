@@ -3,6 +3,7 @@ import sublime_plugin
 import re
 import json
 import os
+import subprocess
 
 if not int(sublime.version()) >= 3000:
 	import BLIH
@@ -11,33 +12,45 @@ else:
 
 def	git_clone_repo(server, login, name, folder):
 	route = str(login) + "@" + str(server) + ":/" + str(login) + "/" + str(name)
-	print(route)
+	command = "git clone " + route + " " + folder
+	print(command)
+	try:
+		res = subprocess.check_output(command, stderr=subprocess.STDOUT, shell=True)
+	except Exception as e:
+		result = {"code": 400, "data": {"message": str(e)}}
+		return result
+	result = {"code": 200, "data": {"message": "Repository cloned"}}
+	return result
 
 def	blih_get_projects(blih):
 	result = blih.execute("repository", "list")
 	repos = []
 	if result and result["code"] == 200:
 		for repo in result["data"]["repositories"]:
-			repos.append(repo)
+			if repo != "":
+				repos.append(repo)
 	repos.sort()
 	return repos
 
 def	output_display(window, data):
 	output = window.create_output_panel("SublimeTek")
 	window.run_command("show_panel", {"panel": "output.SublimeTek"})
-	code = data["code"]
-	message = ""
-	for item in data["data"]:
-		message += str(data["data"][item]) + "\n"
-	result = {"code": code, "message": message}
+	text = ""
+	for msg in data:
+		code = msg["code"]
+		message = ""
+		for item in msg["data"]:
+			message += str(msg["data"][item]) + "\n"
+			if text != "":
+				text += "\n"
+			text += "Code " + str(code) + "\n" + str(message)
+	result = {"text": text}
 	output.run_command("sublime_tek_blih_output", result)
 
 class	SublimeTekBlihOutput(sublime_plugin.TextCommand):
 
 	def	run(self, edit, **args):
-		self.code = str(args["code"])
-		self.message = str(args["message"])
-		text = "Code " + self.code + "\n" + self.message
+		text = args["text"]
 		self.view.insert(edit, 0, text)
 
 class	SublimeTekBlihCreateRepoCommand(sublime_plugin.WindowCommand):
@@ -66,12 +79,12 @@ class	SublimeTekBlihCreateRepoCommand(sublime_plugin.WindowCommand):
 			else:
 				self.set_folder(self.default_folder)
 		else:
-			output_display(self.window, self.result)
+			output_display(self.window, [self.result])
 
 	def	set_folder(self, folder):
 		#Add result for clone
-		git_clone_repo(self.server, self.login, self.name, folder)
-		output_display(self.window, self.result)
+		result = git_clone_repo(self.server, self.login, self.name, folder)
+		output_display(self.window, [self.result, result])
 
 class	SublimeTekBlihDeleteRepoCommand(sublime_plugin.WindowCommand):
 
@@ -80,7 +93,7 @@ class	SublimeTekBlihDeleteRepoCommand(sublime_plugin.WindowCommand):
 			result = self.blih.execute("repository", "delete", route=[name])
 		else:
 			result = {"code": 401, "data": {"message": "Wrong name for confirmation"}}
-		output_display(self.window, result)
+		output_display(self.window, [result])
 
 	def	confirm(self, index):
 		if index != -1:
@@ -98,9 +111,8 @@ class	SublimeTekBlihDeleteRepoCommand(sublime_plugin.WindowCommand):
 class	SublimeTekBlihCloneRepoCommand(sublime_plugin.WindowCommand):
 
 	def	set_folder(self, folder):
-		git_clone_repo(self.server, self.login, self.name, folder)
-		#Add result for clone
-		# output_display(self.window, {"code": 400, "data": {"message": "Repository cloned"}})
+		result = git_clone_repo(self.server, self.login, self.name, folder)
+		output_display(self.window, [result])
 
 	def	confirm(self, index):
 		if index != -1:
@@ -156,7 +168,7 @@ class	SublimeTekBlihSetAclsRepoCommand(sublime_plugin.WindowCommand):
 
 	def	set_acls(self, rights):
 		result = self.blih.execute("repository", "setacl", route=[self.name], body=[self.user_set, rights])
-		output_display(self.window, result)
+		output_display(self.window, [result])
 
 	def	ask_acls(self, name):
 		self.user_set = name

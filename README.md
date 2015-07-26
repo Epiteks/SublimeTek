@@ -76,4 +76,6 @@ Here is an example of configuration :
     * Sublime-project configuration file with .gitignore
     * List of logins for project
 
+* Epitech Header
+
 You can ask for features, I'll check feasibility.
