@@ -57,6 +57,7 @@ Here is an example of configuration :
 * BLIH Integration
     * Create repositories
     * Remove repositories
+    * Clone repositories
     * ACLs
 
 ##TODO
@@ -72,7 +73,6 @@ Here is an example of configuration :
         * Indentation Emacs-LIKE
 
 * BLIH
-    * Clone repositories
     * Sublime-project configuration file with .gitignore
     * List of logins for project
 
