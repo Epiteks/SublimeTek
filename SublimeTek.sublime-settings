@@ -9,5 +9,15 @@
 		"rendu_folder": "",
 		"base_location" : null,
 		"ask_for_folder_at_clone": false,
+		"route": "$login@$server:/$login/$repo",
+		"clone_command": "git clone $route $location"
+		/*
+		** For the two last items :
+		**
+		** $var will be replaced when executed
+		**
+		** Variables for customisation are from config file from config file or are asking when executed
+		**	You can use : $login, $server, $route, $location
+		*/
 	}
 }
